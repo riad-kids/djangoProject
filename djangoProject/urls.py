@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 import pybo
-from pybo import urls
+from pybo import urls, views
+import common
+from common import urls
+
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('pybo/', include(pybo.urls)),
+    path('common/', include(common.urls)),
 ]
