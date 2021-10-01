@@ -20,11 +20,13 @@ import pybo
 from pybo import urls, views
 import common
 from common import urls
-
+import api
+from api import urls
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('pybo/', include(pybo.urls)),
     path('common/', include(common.urls)),
+    path('api/', include(api.urls)),
 ]
