@@ -19,9 +19,9 @@ urlpatterns = format_suffix_patterns([
     path('question/', QuestionView.as_view(post_list), name='post_list'),
     path('question/<int:pk>/', QuestionView.as_view(post_detail), name='post_detail'),
 
-    path('answer/', AnswerView.as_view(post_list), name='post_list'),
+    path('answer/', AnswerView.as_view({'get': 'list'}), name='post_list'),
     path('answer/<int:pk>/', AnswerView.as_view(post_detail), name='post_detail'),
 
-    path('comment/', CommentView.as_view(post_list), name='post_list'),
+    path('comment/', CommentView.as_view({'get': 'list'}), name='post_list'),
     path('comment/<int:pk>/', CommentView.as_view(post_detail), name='post_detail'),
 ])
