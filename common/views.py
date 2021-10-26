@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from common.forms import UserForm
+from django.views.generic.edit import CreateView
 
 
-# Create your views here.
+"""
 def signup(request):
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -17,3 +18,17 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+"""
+
+
+class SignUpCreateView(CreateView):
+    form_class = UserForm
+    template_name = 'common/signup.html'
+
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return redirect('index')
