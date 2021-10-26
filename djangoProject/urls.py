@@ -24,7 +24,8 @@ import api
 from api import urls
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
+    path('', views.IndexListView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('pybo/', include(pybo.urls)),
     path('common/', include(common.urls)),

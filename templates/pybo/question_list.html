@@ -22,11 +22,11 @@
         </tr>
         </thead>
         <tbody>
-        {% if question_list %}
-        {% for question in question_list %}
+        {% if page_obj %}
+        {% for question in page_obj %}
         <tr class="text-center">
             <td>
-                {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
+                {{ page_obj.paginator.count|sub:page_obj.start_index|sub:forloop.counter0|add:1 }}
             </td>
             <td>
                 {% if question.voter.all.count > 0 %}
@@ -58,9 +58,9 @@
     <!-- 페이징 -->
     <ul class="pagination justify-content-center">
         <!-- 이전 -->
-        {% if question_list.has_previous %}
+        {% if page_obj.has_previous %}
         <li class="page-item">
-            <a class="page-link" data-page="{{ question_list.previous_page_number }}" href="#">이전</a>
+            <a class="page-link" data-page="{{ page_obj.previous_page_number }}" href="#">이전</a>
         </li>
         {% else %}
         <li class="page-item disabled">
@@ -68,9 +68,9 @@
         </li>
         {% endif %}
         <!-- 리스트 -->
-        {% for page_number in question_list.paginator.page_range %}
-            {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
-                {% if page_number == question_list.number %}
+        {% for page_number in page_obj.paginator.page_range %}
+            {% if page_number >= page_obj.number|add:-5 and page_number <= page_obj.number|add:5 %}
+                {% if page_number == page_obj.number %}
                 <li class="page-item active" aria-current="page">
                     <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
                 </li>
@@ -82,9 +82,9 @@
             {% endif %}
         {% endfor %}
         <!-- 다음 -->
-        {% if question_list.has_next %}
+        {% if page_obj.has_next %}
         <li class="page-item">
-            <a class="page-link" data-page="{{ question_list.next_page_number }}" href="#">다음</a>
+            <a class="page-link" data-page="{{ page_obj.next_page_number }}" href="#">다음</a>
         </li>
         {% else %}
         <li class="page-item disabled">
